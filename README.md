@@ -1,6 +1,6 @@
-# OAuth2Server Gatling Tests
+# ReadNews Gatling Tests
 
-Simple oauth2 server tests
+Simple readnews microservice tests
 
 To run:
  sbt gatling:test 

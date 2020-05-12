@@ -3,18 +3,14 @@ package net.kamradtfamily.oath2gatling
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
-class OAuth2Simulation extends Simulation {
+class ReadNewsSimulation extends Simulation {
   val httpConf = http
-    .baseURL("http://localhost:8888")
-    .authorizationHeader("Basic dXNlcjpwYXNzd29yZA==")
+    .baseURL("http://localhost:8080")
     .acceptHeader("application/json")
-    .acceptLanguageHeader("en-US,en;q=0.5")
-    .acceptEncodingHeader("gzip, deflate")
-    .contentTypeHeader("application/json")
 
   val scn = scenario("BasicSimulation")
     .exec(http("request_1")
-    .get("/client"))
+    .get("/v1/headlines?limit=50&to=2021-01-01T00:00:00Z"))
     .pause(5)
 
   setUp(
