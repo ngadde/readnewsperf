@@ -1,4 +1,4 @@
-package net.kamradtfamily.oath2gatling
+package net.kamradtfamily.readnewsperf
 
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
