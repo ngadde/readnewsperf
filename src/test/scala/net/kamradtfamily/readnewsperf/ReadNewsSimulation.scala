@@ -20,37 +20,39 @@ class ReadNewsSimulation extends Simulation {
       .exec(http(requestName)
         .get(s"/v1/headlines?limit=${limit}&to=2021-01-01T00:00:00Z"))
   }
+  val testTime = 60
+  val users = 20
 
    setUp(
      generateReadScenario(
        "BigNonBlocking",
        "big-non-blocking",
        1000).inject(
-       atOnceUsers(100)).protocols(httpConfNonBlocking),
+       constantConcurrentUsers(users).during(testTime)).protocols(httpConfNonBlocking),
      generateReadScenario(
        "MedNonBlocking",
        "med-non-blocking",
        100).inject(
-       atOnceUsers(100)).protocols(httpConfNonBlocking),
+       constantConcurrentUsers(users).during(testTime)).protocols(httpConfNonBlocking),
      generateReadScenario(
        "SmallNonBlocking",
        "small-non-blocking",
        1).inject(
-       atOnceUsers(100)).protocols(httpConfNonBlocking),
+       constantConcurrentUsers(users).during(testTime)).protocols(httpConfNonBlocking),
      generateReadScenario(
        "BigBlocking",
        "big-blocking",
        1000).inject(
-       atOnceUsers(100)).protocols(httpConfBlocking),
+       constantConcurrentUsers(users).during(testTime)).protocols(httpConfBlocking),
      generateReadScenario(
        "MedBlocking",
        "med-blocking",
        100).inject(
-       atOnceUsers(100)).protocols(httpConfBlocking),
+       constantConcurrentUsers(users).during(testTime)).protocols(httpConfBlocking),
      generateReadScenario(
        "SmallBlocking",
        "small-blocking",
        1).inject(
-       atOnceUsers(100)).protocols(httpConfBlocking)
+       constantConcurrentUsers(users).during(testTime)).protocols(httpConfBlocking)
    )
 }
